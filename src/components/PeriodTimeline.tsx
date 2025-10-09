@@ -1,6 +1,7 @@
 import { Box, Heading, Stack, Text, Card, Flex } from '@chakra-ui/react';
 import { Periode } from '../intefaces/programmation';
 import { getColor } from '../helpers/colors';
+import { getDurationInDays } from '../helpers/date';
 
 type PeriodTimelineProps = {
   periods: Periode[];
@@ -61,7 +62,7 @@ export const PeriodTimeline = ({ periods }: PeriodTimelineProps) => {
               </Text>
             }
 
-            {/* Timeline point - filled */}
+            {/* Timeline point */}
             <Box
               width="12px"
               height="12px"
@@ -92,10 +93,22 @@ export const PeriodTimeline = ({ periods }: PeriodTimelineProps) => {
                         color="gray.600"
                         fontWeight="semibold"
                       >
+                        Date de fin
+                      </Text>
+                      <Text fontSize="md">
+                        {new Date(periode.endDate).toLocaleDateString('fr-FR')}
+                      </Text>
+                    </Box>
+                    <Box>
+                      <Text
+                        fontSize="sm"
+                        color="gray.600"
+                        fontWeight="semibold"
+                      >
                         Durée de la période (en jours)
                       </Text>
                       <Text fontSize="md">
-                        {getDuration(periode.startDate, periode.endDate)}
+                        {getDurationInDays(periode.startDate, periode.endDate)}
                       </Text>
                     </Box>
                   </Stack>
@@ -108,9 +121,3 @@ export const PeriodTimeline = ({ periods }: PeriodTimelineProps) => {
     </Stack>
   );
 };
-
-function getDuration(startDate: string, endDate: string): number {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  return Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-}

@@ -14,7 +14,7 @@ export interface Programmation {
   columnWidth: number;
   fontSize: string;
   view: string;
-  invertedRowCol: boolean; 
+  invertedRowCol: boolean;
   niveau: string;
   createdAt: string;
   updatedAt: string;
@@ -22,7 +22,7 @@ export interface Programmation {
   onePageMatiere: boolean;
   slug: string;
   documentId: string;
-}     
+}
 
 export interface Periode {
   id: string;

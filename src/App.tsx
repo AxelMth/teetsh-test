@@ -22,9 +22,8 @@ function App() {
   const [activeTab, setActiveTab] = useState<'periodes' | 'domaines'>(
     'periodes'
   );
-  const { data, isLoading, error } = useProgrammation(
-    'd7tfhdcchm1bom0df2z6s8zv'
-  );
+  const programmationId = process.env.REACT_APP_PROGRAMMATION_ID || '';
+  const { data, isLoading, error } = useProgrammation(programmationId);
 
   const domains = useMemo(() => {
     if (!data) return [];

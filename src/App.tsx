@@ -13,16 +13,15 @@ import {
 } from '@chakra-ui/react';
 
 import { useProgrammation } from './hooks/useProgrammation';
-import { Domaine, Periode } from './intefaces/programmation';
+import { Domaine } from './intefaces/programmation';
 import { Matiere } from './intefaces/programmation';
 import { DomainCard } from './components/DomainCard';
 import { ProgrammationTabs } from './constants/programmation.const';
-import { PeriodCard } from './components/PeriodCard';
 import { PeriodTimeline } from './components/PeriodTimeline';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'periodes' | 'domaines'>(
-    'periodes'
+  const [activeTab, setActiveTab] = useState<ProgrammationTabs>(
+    ProgrammationTabs.PERIODES
   );
 
   const PROGRAMMATION_ID = process.env.REACT_APP_PROGRAMMATION_ID || '';
@@ -81,24 +80,38 @@ function App() {
               mb="6"
             >
               <Button
-                variant={activeTab === 'periodes' ? 'solid' : 'ghost'}
+                variant={
+                  activeTab === ProgrammationTabs.PERIODES ? 'solid' : 'ghost'
+                }
                 colorPalette="blue"
-                onClick={() => setActiveTab('periodes')}
+                onClick={() => setActiveTab(ProgrammationTabs.PERIODES)}
                 borderRadius="0"
-                borderBottom={activeTab === 'periodes' ? '3px solid' : 'none'}
+                borderBottom={
+                  activeTab === ProgrammationTabs.PERIODES
+                    ? '3px solid'
+                    : 'none'
+                }
                 borderColor={
-                  activeTab === 'periodes' ? 'blue.500' : 'transparent'
+                  activeTab === ProgrammationTabs.PERIODES
+                    ? 'blue.500'
+                    : 'transparent'
                 }
                 pb="3"
               >
                 Périodes ({sortedPeriodes.length})
               </Button>
               <Button
-                variant={activeTab === 'domaines' ? 'solid' : 'ghost'}
+                variant={
+                  activeTab === ProgrammationTabs.DOMAINES ? 'solid' : 'ghost'
+                }
                 colorPalette="blue"
                 onClick={() => setActiveTab('domaines')}
                 borderRadius="0"
-                borderBottom={activeTab === 'domaines' ? '3px solid' : 'none'}
+                borderBottom={
+                  activeTab === ProgrammationTabs.DOMAINES
+                    ? '3px solid'
+                    : 'none'
+                }
                 borderColor={
                   activeTab === 'domaines' ? 'blue.500' : 'transparent'
                 }
@@ -110,15 +123,6 @@ function App() {
 
             {activeTab === ProgrammationTabs.PERIODES && (
               <PeriodTimeline periods={sortedPeriodes} />
-              // <Grid
-              //   templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-              //   gap="6"
-              //   padding="6"
-              // >
-              //   {sortedPeriodes.map((periode: Periode) => (
-              //     <PeriodCard key={periode.id} periode={periode} />
-              //   ))}
-              // </Grid>
             )}
 
             {activeTab === ProgrammationTabs.DOMAINES && (

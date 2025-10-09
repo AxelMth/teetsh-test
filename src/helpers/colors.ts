@@ -1,3 +1,5 @@
+// Generated with AI to get all the colors we get from API
+
 /**
  * Color palette with shades from 100 to 900
  */

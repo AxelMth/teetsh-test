@@ -12,7 +12,7 @@ export interface Programmation {
   periodes: Periode[];
   matieres: Matiere[];
   columnWidth: number;
-  fontSize: string;
+  fontSize: string; 
   view: string;
   invertedRowCol: boolean;
   niveau: string;

@@ -128,7 +128,15 @@ function App() {
                 padding="6"
               >
                 {domains.map((domaine: Domaine) => (
-                  <DomainCard key={domaine.id} domaine={domaine} />
+                  <DomainCard
+                    key={domaine.id}
+                    domaine={domaine}
+                    matiere={
+                      data?.data.matieres.find(
+                        (matiere: Matiere) => matiere.id === domaine.matiereId
+                      )!
+                    }
+                  />
                 ))}
               </Grid>
             )}

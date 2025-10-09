@@ -1,5 +1,6 @@
-import { Badge, Box, Heading, Stack, Text, Card, Flex } from '@chakra-ui/react';
+import { Box, Heading, Stack, Text, Card, Flex } from '@chakra-ui/react';
 import { Periode } from '../intefaces/programmation';
+import { getColor } from '../helpers/colors';
 
 type PeriodTimelineProps = {
   periods: Periode[];
@@ -21,7 +22,7 @@ export const PeriodTimeline = ({ periods }: PeriodTimelineProps) => {
             display="flex"
             flexDirection="column"
             alignItems="center"
-            width="120px"
+            width="40px"
           >
             {/* Vertical line - continuous from top to bottom */}
             {index !== periods.length - 1 && (
@@ -77,20 +78,11 @@ export const PeriodTimeline = ({ periods }: PeriodTimelineProps) => {
               shadow="md"
               borderRadius="lg"
               borderLeft="4px solid"
-              style={{ borderLeftColor: periode.color }}
+              style={{ borderLeftColor: getColor(periode.color) }}
             >
               <Card.Body>
                 <Stack gap="3">
                   <Box display="flex" alignItems="center" gap="2">
-                    <Badge
-                      colorPalette="blue"
-                      style={{ backgroundColor: periode.color }}
-                      paddingX="3"
-                      paddingY="1"
-                      borderRadius="md"
-                    >
-                      {' '}
-                    </Badge>
                     <Heading size="md">{periode.name}</Heading>
                   </Box>
                   <Stack gap="2">

@@ -23,7 +23,7 @@ export interface Programmation {
   slug: string;
   documentId: string;
 }
-
+           
 export interface Periode {
   id: string;
   name: string;

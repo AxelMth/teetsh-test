@@ -21,8 +21,8 @@ export interface Programmation {
   publishedAt: string;
   onePageMatiere: boolean;
   slug: string;
-  documentId: string;
-}
+  documentId: string; 
+} 
 
 export interface Periode {
   id: string;

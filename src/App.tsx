@@ -3,9 +3,10 @@ import { useProgrammation } from './hooks/useProgrammation';
 import { Periode } from './intefaces/programmation';
 import { Matiere } from './intefaces/programmation';
 
-
 function App() {
-  const { data, isLoading, error } = useProgrammation('d7tfhdcchm1bom0df2z6s8zv');
+  const { data, isLoading, error } = useProgrammation(
+    'd7tfhdcchm1bom0df2z6s8zv'
+  );
 
   if (isLoading) {
     return <div className="App">Loading...</div>;

@@ -20,24 +20,27 @@ export const DomainCard = ({ domaine, matiere }: DomainCardProps) => {
       borderRadius="lg"
       borderLeft="4px solid"
       style={{ borderLeftColor: getColor(domaine.color) }}
+      position="relative"
     >
+      <Badge
+        colorPalette="blue"
+        variant="subtle"
+        color={getColor(matiere.color)}
+        backgroundColor={getBackgroundColor(matiere.color)}
+        position="absolute"
+        top="0"
+        right="0"
+        borderTopRightRadius="lg"
+        borderBottomLeftRadius="lg"
+        borderTopLeftRadius="0"
+        borderBottomRightRadius="0"
+      >
+        {matiere.name}
+      </Badge>
       <Card.Body>
         <Stack gap="3">
-          <Box
-            display="flex"
-            alignItems="center"
-            gap="2"
-            justifyContent="space-between"
-          >
+          <Box>
             <Heading size="md">{domaine.name}</Heading>
-            <Badge
-              colorPalette="blue"
-              variant="subtle"
-              color={getColor(matiere.color)}
-              backgroundColor={getBackgroundColor(matiere.color)}
-            >
-              {matiere.name}
-            </Badge>
           </Box>
           <Box>
             <Text fontSize="sm" color="gray.600" fontWeight="semibold">

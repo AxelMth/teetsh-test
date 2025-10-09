@@ -15,7 +15,7 @@ export interface Programmation {
   fontSize: string;
   view: string;
   invertedRowCol: boolean;
-  niveau: string;
+  niveau: string; 
   createdAt: string;
   updatedAt: string;
   publishedAt: string;

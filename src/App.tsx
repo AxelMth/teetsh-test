@@ -31,13 +31,11 @@ function App() {
     const allDomains = data.data.matieres.flatMap(
       (matiere: Matiere) => matiere.domaines
     );
-    // Sort by position
     return allDomains.sort((a, b) => a.position - b.position);
   }, [data]);
 
   const sortedPeriodes = useMemo(() => {
     if (!data) return [];
-    // Sort by position
     return [...data.data.periodes].sort((a, b) => a.position - b.position);
   }, [data]);
 
@@ -64,7 +62,7 @@ function App() {
     <Box minHeight="100vh" bg="gray.50" padding="8">
       <Container maxWidth="1200px">
         <Stack gap="6">
-          <Box textAlign="center">
+          <Box>
             <Heading size="2xl" marginBottom="2">
               {data?.data.name}
             </Heading>

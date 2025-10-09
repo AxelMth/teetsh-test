@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 
 // Create a client
 const queryClient = new QueryClient({
@@ -21,9 +22,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
+    <ChakraProvider value={defaultSystem}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </ChakraProvider>
   </React.StrictMode>
 );
 

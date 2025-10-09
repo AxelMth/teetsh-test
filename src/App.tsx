@@ -1,12 +1,19 @@
 import './App.css';
+import { useMemo } from 'react';
+
 import { useProgrammation } from './hooks/useProgrammation';
-import { Periode } from './intefaces/programmation';
+import { Domaine, Periode } from './intefaces/programmation';
 import { Matiere } from './intefaces/programmation';
 
 function App() {
   const { data, isLoading, error } = useProgrammation(
     'd7tfhdcchm1bom0df2z6s8zv'
   );
+
+  const domains = useMemo(() => {
+    if (!data) return [];
+    return data.data.matieres.flatMap((matiere: Matiere) => matiere.domaines);
+  }, [data]);
 
   if (isLoading) {
     return <div className="App">Loading...</div>;
@@ -32,11 +39,11 @@ function App() {
           </ul>
         </div>
         <div>
-          <h2>Matières ({data?.data.matieres.length})</h2>
+          <h2>Domaines ({data?.data.matieres.length})</h2>
           <ul>
-            {data?.data.matieres.map((matiere: Matiere) => (
-              <li key={matiere.id}>
-                {matiere.name} ({matiere.domaines.length} domaines)
+            {domains.map((domaine: Domaine) => (
+              <li key={domaine.id}>
+                {domaine.name} ({domaine.items.length} items)
               </li>
             ))}
           </ul>

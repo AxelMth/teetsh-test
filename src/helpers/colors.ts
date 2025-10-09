@@ -115,17 +115,17 @@ const Colors: Record<string, string> = {
 /**
  * Get the color hexa code from the color name
  * If the color is not found, return the color name
- * 
+ *
  * @param color - The color in format 'color-shade' (e.g., 'blue-500', 'red-600')
  * @returns The hexadecimal color code or the original color string if not found
- * 
+ *
  * @example
  * getColor('blue-500') // returns '#007bff'
  * getColor('red-600') // returns '#c82333'
  * getColor('unknown-color') // returns 'unknown-color'
  */
 export const getBackgroundColor = (color: string): string => {
-  const foundColor = Colors[color]
+  const foundColor = Colors[color];
   if (!foundColor) {
     console.error('color not found', color);
     return color;
@@ -136,10 +136,10 @@ export const getBackgroundColor = (color: string): string => {
 /**
  * Get a darker shade for text color based on the background color
  * Takes a color and returns a darker variant for better contrast
- * 
+ *
  * @param color - The background color in format 'color-shade' (e.g., 'blue-500', 'red-600')
  * @returns The hexadecimal color code of a darker shade
- * 
+ *
  * @example
  * getColor('blue-500') // returns darker blue like '#1565c0' (blue-800)
  * getColor('red-300') // returns darker red like '#c62828' (red-800)
@@ -168,7 +168,11 @@ export const getColor = (color: string): string => {
 
   const foundColor = Colors[darkerColorKey];
   if (!foundColor) {
-    console.error('Darker color not found', darkerColorKey, 'falling back to original');
+    console.error(
+      'Darker color not found',
+      darkerColorKey,
+      'falling back to original'
+    );
     // Fallback to original color if darker shade doesn't exist
     return Colors[color] || color;
   }

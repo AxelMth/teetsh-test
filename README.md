@@ -1,46 +1,105 @@
-# Getting Started with Create React App
+# Teetsh - Visualisation de Programmations Scolaires
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Deployment Status](https://img.shields.io/badge/Vercel-Deployed-success?logo=vercel)](https://vercel.com)
 
-## Available Scripts
+Une application React pour visualiser et gérer les programmations scolaires. Permet aux professeurs des écoles de planifier l'enseignement de leurs matières sur l'année scolaire, organisé par périodes et domaines.
 
-In the project directory, you can run:
+## 📋 Contexte du Projet
 
-### `npm start`
+### Enoncé
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Une **matière** (ex: Français, Mathématiques, etc.) est composée de **domaines** (ex: langage oral, écriture, etc.)
+- L'**année scolaire** est composée de **5 périodes** (entre chaque vacance scolaire)
+- Une **programmation** est un document créé par le professeur des écoles pour découper l'enseignement d'une matière et la planifier chronologiquement dans l'année, période par période
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> 👉 L'objectif est de pouvoir **visualiser une programmation sur 2 axes : les périodes × les domaines.**
 
-### `npm test`
+## 🏗️ Architecture du Projet
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Le projet est organisé selon une architecture React moderne avec une séparation claire des responsabilités :
 
-### `npm run build`
+```
+src/
+├── components/          # Composants React réutilisables
+│   ├── DomainCard.tsx       # Carte d'affichage d'un domaine
+│   ├── PeriodCard.tsx       # Carte d'affichage d'une période
+│   └── PeriodTimeline.tsx   # Timeline chronologique des périodes
+│
+├── hooks/               # Custom React Hooks
+│   └── useProgrammation.ts  # Hook pour récupérer les données de programmation
+│
+├── helpers/             # Fonctions utilitaires
+│   ├── colors.ts            # Gestion de la palette de couleurs
+│   └── date.ts              # Fonctions de manipulation de dates
+│
+├── interfaces/          # Définitions TypeScript
+│   └── programmation.ts     # Types: Programmation, Periode, Matiere, Domaine, Item
+│
+├── constants/           # Constantes de l'application
+│   └── programmation.const.ts  # Tabs et autres constantes
+│
+└── App.tsx              # Composant principal
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Stack Technique
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Frontend**: React 19.2.0 avec TypeScript
+- **UI Library**: Chakra UI v3 pour l'interface utilisateur
+- **State Management**: TanStack Query (React Query) pour la gestion des données asynchrones
+- **Styling**: Emotion pour le CSS-in-JS
+- **Build Tool**: Create React App avec react-scripts
+- **Package Manager**: pnpm 9.1.0
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Flux de Données
 
-### `npm run eject`
+1. **Récupération des données** : L'application utilise le hook `useProgrammation` qui fait appel à une API externe
+2. **Configuration API** : Via les variables d'environnement `REACT_APP_API_BASE_URL`, `REACT_APP_BEARER_TOKEN`, et `REACT_APP_PROGRAMMATION_ID`
+3. **Gestion du cache** : TanStack Query gère le cache et l'état de chargement
+4. **Affichage** : Deux vues principales via des tabs :
+   - **Vue Périodes** : Timeline chronologique des périodes avec dates et durées
+   - **Vue Domaines** : Grille de cartes affichant tous les domaines avec leurs statuts de tâches
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🚀 Commandes Disponibles
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Développement
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+pnpm start
+```
+Lance l'application en mode développement sur [http://localhost:3000](http://localhost:3000).
+Le rechargement automatique est activé lors de modifications du code.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Tests
 
-## Learn More
+```bash
+pnpm test
+```
+Lance Jest en mode watch interactif pour exécuter les tests unitaires.
+Le projet inclut des tests pour les helpers (`colors.test.ts`, `date.test.ts`).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Build Production
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+pnpm build
+```
+Crée un build optimisé pour la production dans le dossier `build/`.
+- Minification du code
+- Optimisation des assets
+- Inclusion des hashes dans les noms de fichiers
+
+### Linting et Formatage
+
+```bash
+pnpm lint              # Vérifie le code avec ESLint
+pnpm lint:fix          # Corrige automatiquement les erreurs ESLint
+pnpm prettier          # Formate le code avec Prettier
+pnpm prettier:check    # Vérifie le formatage sans modifier
+pnpm format            # Exécute prettier + lint:fix
+```
+
+### Git Hooks
+
+Le projet utilise **Husky** et **lint-staged** pour garantir la qualité du code avant chaque commit :
+- Formatage automatique avec Prettier
+- Vérification ESLint avec un maximum de 0 avertissements
+- Appliqué uniquement aux fichiers modifiés

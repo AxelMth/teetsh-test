@@ -3,4 +3,5 @@ export const ProgrammationTabs = {
   DOMAINES: 'domaines',
 } as const;
 
-export type ProgrammationTabs = (typeof ProgrammationTabs)[keyof typeof ProgrammationTabs];
+export type ProgrammationTabs =
+  (typeof ProgrammationTabs)[keyof typeof ProgrammationTabs];

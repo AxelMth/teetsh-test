@@ -1,9 +1,9 @@
-import { Badge, Box, Heading, Stack, Text, Card } from "@chakra-ui/react";
-import { Periode } from "../intefaces/programmation";
+import { Badge, Box, Heading, Stack, Text, Card } from '@chakra-ui/react';
+import { Periode } from '../intefaces/programmation';
 
 type PeriodCardProps = {
-    periode : Periode;
-  };
+  periode: Periode;
+};
 
 export const PeriodCard = ({ periode }: PeriodCardProps) => {
   return (

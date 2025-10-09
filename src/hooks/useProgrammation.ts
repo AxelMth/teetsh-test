@@ -15,10 +15,9 @@ const fetchProgrammation = async (
     headers['Authorization'] = `Bearer ${bearerToken}`;
   }
 
-  const response = await fetch(
-    `${baseUrl}/api/programmations/${documentId}`,
-    { headers }
-  );
+  const response = await fetch(`${baseUrl}/api/programmations/${documentId}`, {
+    headers,
+  });
 
   if (!response.ok) {
     throw new Error('Failed to fetch programmation');

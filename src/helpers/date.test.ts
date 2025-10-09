@@ -34,9 +34,9 @@ describe('getDurationInDays', () => {
   });
 
   test('should handle ISO date format with time', () => {
-    expect(getDurationInDays('2025-01-01T00:00:00', '2025-01-05T00:00:00')).toBe(
-      4
-    );
+    expect(
+      getDurationInDays('2025-01-01T00:00:00', '2025-01-05T00:00:00')
+    ).toBe(4);
   });
 
   test('should handle dates with different formats', () => {

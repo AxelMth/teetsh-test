@@ -12,7 +12,7 @@ export interface Programmation {
   periodes: Periode[];
   matieres: Matiere[];
   columnWidth: number;
-  fontSize: string; 
+  fontSize: string;
   view: string;
   invertedRowCol: boolean;
   niveau: string;
@@ -21,8 +21,8 @@ export interface Programmation {
   publishedAt: string;
   onePageMatiere: boolean;
   slug: string;
-  documentId: string; 
-} 
+  documentId: string;
+}
 
 export interface Periode {
   id: string;

@@ -19,6 +19,6 @@ export const useProgrammation = (documentId: string) => {
   return useQuery({
     queryKey: ['programmation', documentId],
     queryFn: () => fetchProgrammation(documentId),
-    enabled: !!documentId, // Only run query if documentId exists
+    enabled: !!documentId,
   });
 };

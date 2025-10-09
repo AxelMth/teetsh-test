@@ -17,7 +17,8 @@ import { Domaine, Periode } from './intefaces/programmation';
 import { Matiere } from './intefaces/programmation';
 import { DomainCard } from './components/DomainCard';
 import { ProgrammationTabs } from './constants/programmation.const';
-import { PeriodCard } from './components/PeriodTimeline';
+import { PeriodCard } from './components/PeriodCard';
+import { PeriodTimeline } from './components/PeriodTimeline';
 
 function App() {
   const [activeTab, setActiveTab] = useState<'periodes' | 'domaines'>(
@@ -108,15 +109,16 @@ function App() {
             </Flex>
 
             {activeTab === ProgrammationTabs.PERIODES && (
-              <Grid
-                templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-                gap="6"
-                padding="6"
-              >
-                {sortedPeriodes.map((periode: Periode) => (
-                  <PeriodCard key={periode.id} periode={periode} />
-                ))}
-              </Grid>
+              <PeriodTimeline periods={sortedPeriodes} />
+              // <Grid
+              //   templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
+              //   gap="6"
+              //   padding="6"
+              // >
+              //   {sortedPeriodes.map((periode: Periode) => (
+              //     <PeriodCard key={periode.id} periode={periode} />
+              //   ))}
+              // </Grid>
             )}
 
             {activeTab === ProgrammationTabs.DOMAINES && (

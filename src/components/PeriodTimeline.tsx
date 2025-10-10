@@ -9,7 +9,7 @@ type PeriodTimelineProps = {
 
 export const PeriodTimeline = ({ periods }: PeriodTimelineProps) => {
   return (
-    <Stack gap="0" position="relative">
+    <Stack gap="0" position="relative" pl={{ base: '0', md: '120px' }}>
       {periods.map((periode, index) => (
         <Flex
           key={periode.id}
@@ -50,13 +50,15 @@ export const PeriodTimeline = ({ periods }: PeriodTimelineProps) => {
             {/* Date on left */}
             {
               <Text
-                position="absolute"
-                right="calc(50% + 20px)"
-                top="10px"
+                position={{ base: 'relative', md: 'absolute' }}
+                right={{ base: 'auto', md: 'calc(50% + 20px)' }}
+                top={{ base: 'auto', md: '10px' }}
+                mb={{ base: '2', md: '0' }}
                 fontSize="sm"
                 fontWeight="semibold"
                 color="gray.700"
                 whiteSpace="nowrap"
+                textAlign={{ base: 'center', md: 'right' }}
               >
                 {new Date(periode.startDate).toLocaleDateString('fr-FR')}
               </Text>

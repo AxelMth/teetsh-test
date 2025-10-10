@@ -1,5 +1,7 @@
 import { getColor, getBackgroundColor } from './colors';
 
+// Some of the tests have been added by AI
+
 describe('getColor', () => {
   test('should return darker shade (900) for colors >= 500', () => {
     expect(getColor('blue-500')).toBe('#0d47a1'); // blue-900

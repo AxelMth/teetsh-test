@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 
-// Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

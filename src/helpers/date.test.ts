@@ -1,5 +1,7 @@
 import { getDurationInDays } from './date';
 
+// Some of the tests have been added by AI
+
 describe('getDurationInDays', () => {
   test('should return 0 when the start date is the same as the end date', () => {
     expect(getDurationInDays('2025-01-01', '2025-01-01')).toBe(0);

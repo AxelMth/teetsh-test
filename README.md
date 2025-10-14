@@ -21,9 +21,11 @@ Le projet est organisé selon une architecture React moderne avec une séparatio
 ```
 src/
 ├── components/          # Composants React réutilisables
-│   ├── DomainCard.tsx       # Carte d'affichage d'un domaine
-│   ├── PeriodCard.tsx       # Carte d'affichage d'une période
-│   └── PeriodTimeline.tsx   # Timeline chronologique des périodes
+│   ├── ProgrammationMatrix.tsx  # Grille matricielle périodes × domaines
+│   ├── DomainHeader.tsx         # En-tête d'un domaine avec matière associée
+│   ├── PeriodHeader.tsx         # En-tête d'une période avec dates
+│   ├── ProgrammationCell.tsx    # Cellule de la matrice contenant les items
+│   └── ItemCard.tsx             # Carte d'affichage d'un item avec statut
 │
 ├── hooks/               # Custom React Hooks
 │   └── useProgrammation.ts  # Hook pour récupérer les données de programmation
@@ -36,7 +38,7 @@ src/
 │   └── programmation.ts     # Types: Programmation, Periode, Matiere, Domaine, Item
 │
 ├── constants/           # Constantes de l'application
-│   └── programmation.const.ts  # Tabs et autres constantes
+│   └── programmation.const.ts  # Constantes de l'application
 │
 └── App.tsx              # Composant principal
 ```
@@ -55,9 +57,10 @@ src/
 1. **Récupération des données** : L'application utilise le hook `useProgrammation` qui fait appel à une API externe
 2. **Configuration API** : Via les variables d'environnement `REACT_APP_API_BASE_URL`, `REACT_APP_BEARER_TOKEN`, et `REACT_APP_PROGRAMMATION_ID`
 3. **Gestion du cache** : TanStack Query gère le cache et l'état de chargement
-4. **Affichage** : Deux vues principales via des tabs :
-   - **Vue Périodes** : Timeline chronologique des périodes avec dates et durées
-   - **Vue Domaines** : Grille de cartes affichant tous les domaines avec leurs statuts de tâches
+4. **Affichage** : Vue matricielle unique affichant la programmation sur 2 axes :
+   - **Colonnes** : Les 5 périodes de l'année scolaire avec leurs dates
+   - **Lignes** : Tous les domaines organisés par matière
+   - **Cellules** : Les items de chaque domaine pour chaque période, avec statuts visuels (todo, en cours, terminé)
 
 ## 🚀 Commandes Disponibles
 

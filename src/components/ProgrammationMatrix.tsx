@@ -33,9 +33,12 @@ const ItemCard = ({ item }: { item: Item }) => {
       mb="2"
     >
       <Card.Body p="2">
-        <Text fontSize="xs" color={statusColors.color} fontWeight="medium">
-          {item.value}
-        </Text>
+        <Text 
+          fontSize="xs" 
+          color={statusColors.color} 
+          fontWeight="medium"
+          dangerouslySetInnerHTML={{ __html: item.value }}
+        />
       </Card.Body>
     </Card.Root>
   );

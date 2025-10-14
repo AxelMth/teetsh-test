@@ -69,6 +69,7 @@ src/
 ```bash
 pnpm start
 ```
+
 Lance l'application en mode développement sur [http://localhost:3000](http://localhost:3000).
 Le rechargement automatique est activé lors de modifications du code.
 
@@ -77,6 +78,7 @@ Le rechargement automatique est activé lors de modifications du code.
 ```bash
 pnpm test
 ```
+
 Lance Jest en mode watch interactif pour exécuter les tests unitaires.
 Le projet inclut des tests pour les helpers (`colors.test.ts`, `date.test.ts`).
 
@@ -85,7 +87,9 @@ Le projet inclut des tests pour les helpers (`colors.test.ts`, `date.test.ts`).
 ```bash
 pnpm build
 ```
+
 Crée un build optimisé pour la production dans le dossier `build/`.
+
 - Minification du code
 - Optimisation des assets
 - Inclusion des hashes dans les noms de fichiers
@@ -103,6 +107,7 @@ pnpm format            # Exécute prettier + lint:fix
 ### Git Hooks
 
 Le projet utilise **Husky** et **lint-staged** pour garantir la qualité du code avant chaque commit :
+
 - Formatage automatique avec Prettier
 - Vérification ESLint avec un maximum de 0 avertissements
 - Appliqué uniquement aux fichiers modifiés

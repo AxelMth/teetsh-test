@@ -1,4 +1,4 @@
-import App from "./App";
+import App from './App';
 
 import { render, screen } from '@testing-library/react';
 import { useProgrammation } from './hooks/useProgrammation';
@@ -18,7 +18,9 @@ jest.mock('./components/ProgrammationMatrix', () => ({
   ),
 }));
 
-const mockUseProgrammation = useProgrammation as jest.MockedFunction<typeof useProgrammation>;
+const mockUseProgrammation = useProgrammation as jest.MockedFunction<
+  typeof useProgrammation
+>;
 
 describe('App', () => {
   beforeEach(() => {
@@ -352,4 +354,4 @@ describe('App', () => {
     expect(screen.getByTestId('domains-count')).toHaveTextContent('0');
     expect(screen.getByTestId('matieres-count')).toHaveTextContent('0');
   });
-}); 
+});

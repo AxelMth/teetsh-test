@@ -34,4 +34,3 @@ export const DomainHeader = ({ domain, matiere }: DomainHeaderProps) => {
     </Box>
   );
 };
-

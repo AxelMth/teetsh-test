@@ -37,4 +37,3 @@ export const ProgrammationCell = ({ items }: ProgrammationCellProps) => {
     </Box>
   );
 };
-

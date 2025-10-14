@@ -27,4 +27,3 @@ export const PeriodHeader = ({ period }: PeriodHeaderProps) => {
     </Box>
   );
 };
-

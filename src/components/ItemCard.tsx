@@ -30,9 +30,9 @@ export const ItemCard = ({ item }: ItemCardProps) => {
       mb="2"
     >
       <Card.Body p="2">
-        <Text 
-          fontSize="xs" 
-          color={statusColors.color} 
+        <Text
+          fontSize="xs"
+          color={statusColors.color}
           fontWeight="medium"
           dangerouslySetInnerHTML={{ __html: item.value }}
         />
@@ -40,4 +40,3 @@ export const ItemCard = ({ item }: ItemCardProps) => {
     </Card.Root>
   );
 };
-

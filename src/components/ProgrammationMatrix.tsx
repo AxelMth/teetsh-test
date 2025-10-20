@@ -1,16 +1,19 @@
 import { Box, Grid, Text } from '@chakra-ui/react';
 import { Domaine, Matiere, Periode } from '../intefaces/programmation';
-import { PeriodHeader } from './PeriodHeader';
+import { Header } from './Header';
 import { DomainHeader } from './DomainHeader';
 import { ProgrammationCell } from './ProgrammationCell';
+import { ProgrammationViewMode } from '../constants/programmation.const';
 
 type ProgrammationMatrixProps = {
+  viewMode: ProgrammationViewMode
   periods: Periode[];
   domains: Domaine[];
   matieres: Matiere[];
 };
 
 export const ProgrammationMatrix = ({
+  viewMode,
   periods,
   domains,
   matieres,
@@ -53,7 +56,7 @@ export const ProgrammationMatrix = ({
 
           {/* Period headers */}
           {periods.map((period) => (
-            <PeriodHeader key={period.id} period={period} />
+            <Header key={period.id} title={period.name} color={period.color} />
           ))}
         </Grid>
 

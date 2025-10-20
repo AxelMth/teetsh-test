@@ -1,7 +1,6 @@
 import { Box, Grid, Text } from '@chakra-ui/react';
 import { Domaine, Matiere, Periode } from '../intefaces/programmation';
 import { Header } from './Header';
-import { DomainHeader } from './DomainHeader';
 import { ProgrammationCell } from './ProgrammationCell';
 import { ProgrammationViewMode } from '../constants/programmation.const';
 import { useEffect, useState } from 'react';
@@ -19,6 +18,12 @@ type Column = {
   color: string
 }
 
+type Row = {
+  id: string
+  title: string
+  color: string
+}
+
 export const ProgrammationMatrix = ({
   viewMode,
   periods,
@@ -26,16 +31,13 @@ export const ProgrammationMatrix = ({
   matieres,
 }: ProgrammationMatrixProps) => {
   const [columns, setColumns] = useState<Column[]>([])
+  const [rows, setRows] = useState<Row[]>([])
 
   // Get items for a specific domain and period
   const getItemsForCell = (domaineId: string, periodeId: string) => {
     const domain = domains.find((d) => d.id === domaineId);
     if (!domain) return [];
     return domain.items.filter((item) => item.periodeId === periodeId);
-  };
-
-  const getMatiereForDomain = (domaineId: string): Matiere | undefined => {
-    return matieres.find((m) => m.domaines.some((d) => d.id === domaineId));
   };
 
   useEffect(() => {
@@ -50,6 +52,22 @@ export const ProgrammationMatrix = ({
         id: p.id,
         title: p.name,
         color: p.color
+      })))
+    }
+  }, [viewMode, periods, domains])
+
+  useEffect(() => {
+    if (viewMode === ProgrammationViewMode.DOMAINES) {
+      setRows(periods.map(p => ({
+        id: p.id,
+        title: p.name,
+        color: p.color
+      })))
+    } else {
+      setRows(domains.map(d => ({
+        id: d.id,
+        title: d.name,
+        color: d.color
       })))
     }
   }, [viewMode, periods, domains])
@@ -85,25 +103,22 @@ export const ProgrammationMatrix = ({
         </Grid>
 
         {/* Data rows */}
-        {domains.map((domain) => {
-          const matiere = getMatiereForDomain(domain.id);
+        {rows.map((row) => {
           return (
             <Grid
-              key={domain.id}
+              key={row.id}
               templateColumns={`200px repeat(${periods.length}, 250px)`}
               gap="0"
               borderLeft="2px solid"
               borderColor="gray.300"
             >
-              {/* Domain header cell */}
-              <DomainHeader domain={domain} matiere={matiere} />
+              <Header title={row.title} color={row.color} />
 
-              {/* Cells for each period */}
-              {periods.map((period) => {
-                const items = getItemsForCell(domain.id, period.id);
+              {columns.map((column) => {
+                const items = getItemsForCell(row.id, column.id);
                 return (
                   <ProgrammationCell
-                    key={`${domain.id}-${period.id}`}
+                    key={`${row.id}-${column.id}`}
                     items={items}
                   />
                 );

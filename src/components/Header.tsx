@@ -2,8 +2,8 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import { getColor } from '../helpers/colors';
 
 type HeaderProps = {
-  title: string
-  color: string
+  title: string;
+  color: string;
 };
 
 export const Header = ({ title, color }: HeaderProps) => {

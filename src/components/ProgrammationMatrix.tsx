@@ -1,83 +1,46 @@
 import { Box, Grid, Text } from '@chakra-ui/react';
-import { Domaine, Matiere, Periode } from '../intefaces/programmation';
+import { Domaine, Item, Matiere, Periode } from '../intefaces/programmation';
 import { Header } from './Header';
 import { ProgrammationCell } from './ProgrammationCell';
 import { ProgrammationViewMode } from '../constants/programmation.const';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
+import { getMatrix } from '../helpers/matrix';
 
 type ProgrammationMatrixProps = {
-  viewMode: ProgrammationViewMode
+  viewMode: ProgrammationViewMode;
   periods: Periode[];
   domains: Domaine[];
-  matieres: Matiere[];
 };
-
-type Column = {
-  id: string
-  title: string
-  color: string
-}
-
-type Row = {
-  id: string
-  title: string
-  color: string
-}
 
 export const ProgrammationMatrix = ({
   viewMode,
   periods,
   domains,
-  matieres,
 }: ProgrammationMatrixProps) => {
-  const [columns, setColumns] = useState<Column[]>([])
-  const [rows, setRows] = useState<Row[]>([])
-
-  // Get items for a specific domain and period
-  const getItemsForCell = (domaineId: string, periodeId: string) => {
-    const domain = domains.find((d) => d.id === domaineId);
-    if (!domain) return [];
-    return domain.items.filter((item) => item.periodeId === periodeId);
+  const { rows, columns } = getMatrix(
+    viewMode,
+    periods,
+    domains
+  )
+  const items = domains.flatMap((domain) => domain.items)
+  
+  const getItemsForCell = (rowId: string, columnId: string) => {
+    const domainId =
+      viewMode === ProgrammationViewMode.DOMAINES ? columnId : rowId;
+    const periodId =
+      viewMode === ProgrammationViewMode.PERIODES ? columnId : rowId;
+    // TODO: Optimize by using maps
+    return items.filter(
+      (item) => item.domaineId === domainId && item.periodeId === periodId
+    );
   };
-
-  useEffect(() => {
-    if (viewMode === ProgrammationViewMode.DOMAINES) {
-      setColumns(domains.map((d) => ({
-        id: d.id,
-        title: d.name,
-        color: d.color
-      })))
-    } else {
-      setColumns(periods.map(p => ({
-        id: p.id,
-        title: p.name,
-        color: p.color
-      })))
-    }
-  }, [viewMode, periods, domains])
-
-  useEffect(() => {
-    if (viewMode === ProgrammationViewMode.DOMAINES) {
-      setRows(periods.map(p => ({
-        id: p.id,
-        title: p.name,
-        color: p.color
-      })))
-    } else {
-      setRows(domains.map(d => ({
-        id: d.id,
-        title: d.name,
-        color: d.color
-      })))
-    }
-  }, [viewMode, periods, domains])
 
   return (
     <Box overflowX="auto" pb="4">
       <Box minWidth="fit-content">
         {/* Header row with periods */}
         <Grid
-          templateColumns={`200px repeat(${periods.length}, 250px)`}
+          templateColumns={`200px repeat(${columns.length}, 250px)`}
           gap="0"
           borderTop="2px solid"
           borderLeft="2px solid"
@@ -107,7 +70,7 @@ export const ProgrammationMatrix = ({
           return (
             <Grid
               key={row.id}
-              templateColumns={`200px repeat(${periods.length}, 250px)`}
+              templateColumns={`200px repeat(${columns.length}, 250px)`}
               gap="0"
               borderLeft="2px solid"
               borderColor="gray.300"

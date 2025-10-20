@@ -18,7 +18,8 @@ function App() {
   const PROGRAMMATION_ID = process.env.REACT_APP_PROGRAMMATION_ID || '';
   const { data, isLoading, error } = useProgrammation(PROGRAMMATION_ID);
 
-  const [programmationViewMode, setProgrammationViewMode] = useState<ProgrammationViewMode>(ProgrammationViewMode.PERIODES)
+  const [programmationViewMode, setProgrammationViewMode] =
+    useState<ProgrammationViewMode>(ProgrammationViewMode.PERIODES);
 
   const domains = useMemo(() => {
     if (!data) return [];
@@ -63,11 +64,15 @@ function App() {
             <Text fontSize="lg" color="gray.600">
               {data?.data.shortDescription}
             </Text>
-            <Button onClick={() => {
-              setProgrammationViewMode(
-                programmationViewMode === ProgrammationViewMode.DOMAINES ? ProgrammationViewMode.PERIODES : ProgrammationViewMode.DOMAINES
-              )
-            }}>
+            <Button
+              onClick={() => {
+                setProgrammationViewMode(
+                  programmationViewMode === ProgrammationViewMode.DOMAINES
+                    ? ProgrammationViewMode.PERIODES
+                    : ProgrammationViewMode.DOMAINES
+                );
+              }}
+            >
               Interchanger les périodes et les domaines
             </Button>
           </Box>
@@ -77,7 +82,6 @@ function App() {
               viewMode={programmationViewMode}
               periods={sortedPeriodes}
               domains={domains}
-              matieres={data?.data.matieres || []}
             />
           </Box>
         </Stack>

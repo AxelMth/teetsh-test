@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import {
   Box,
   Container,
@@ -6,15 +6,19 @@ import {
   Text,
   Spinner,
   Stack,
+  Button,
 } from '@chakra-ui/react';
 
 import { useProgrammation } from './hooks/useProgrammation';
 import { Matiere } from './intefaces/programmation';
 import { ProgrammationMatrix } from './components/ProgrammationMatrix';
+import { ProgrammationViewMode } from './constants/programmation.const';
 
 function App() {
   const PROGRAMMATION_ID = process.env.REACT_APP_PROGRAMMATION_ID || '';
   const { data, isLoading, error } = useProgrammation(PROGRAMMATION_ID);
+
+  const [programmationViewMode, setProgrammationViewMode] = useState<ProgrammationViewMode>(ProgrammationViewMode.PERIODES)
 
   const domains = useMemo(() => {
     if (!data) return [];
@@ -59,10 +63,18 @@ function App() {
             <Text fontSize="lg" color="gray.600">
               {data?.data.shortDescription}
             </Text>
+            <Button onClick={() => {
+              setProgrammationViewMode(
+                programmationViewMode === ProgrammationViewMode.DOMAINES ? ProgrammationViewMode.PERIODES : ProgrammationViewMode.DOMAINES
+              )
+            }}>
+              Interchanger les périodes et les domaines
+            </Button>
           </Box>
 
           <Box>
             <ProgrammationMatrix
+              viewMode={programmationViewMode}
               periods={sortedPeriodes}
               domains={domains}
               matieres={data?.data.matieres || []}

@@ -4,6 +4,7 @@ import { Header } from './Header';
 import { DomainHeader } from './DomainHeader';
 import { ProgrammationCell } from './ProgrammationCell';
 import { ProgrammationViewMode } from '../constants/programmation.const';
+import { useEffect, useState } from 'react';
 
 type ProgrammationMatrixProps = {
   viewMode: ProgrammationViewMode
@@ -12,12 +13,20 @@ type ProgrammationMatrixProps = {
   matieres: Matiere[];
 };
 
+type Column = {
+  id: string
+  title: string
+  color: string
+}
+
 export const ProgrammationMatrix = ({
   viewMode,
   periods,
   domains,
   matieres,
 }: ProgrammationMatrixProps) => {
+  const [columns, setColumns] = useState<Column[]>([])
+
   // Get items for a specific domain and period
   const getItemsForCell = (domaineId: string, periodeId: string) => {
     const domain = domains.find((d) => d.id === domaineId);
@@ -28,6 +37,22 @@ export const ProgrammationMatrix = ({
   const getMatiereForDomain = (domaineId: string): Matiere | undefined => {
     return matieres.find((m) => m.domaines.some((d) => d.id === domaineId));
   };
+
+  useEffect(() => {
+    if (viewMode === ProgrammationViewMode.DOMAINES) {
+      setColumns(domains.map((d) => ({
+        id: d.id,
+        title: d.name,
+        color: d.color
+      })))
+    } else {
+      setColumns(periods.map(p => ({
+        id: p.id,
+        title: p.name,
+        color: p.color
+      })))
+    }
+  }, [viewMode, periods, domains])
 
   return (
     <Box overflowX="auto" pb="4">
@@ -54,9 +79,8 @@ export const ProgrammationMatrix = ({
             </Text>
           </Box>
 
-          {/* Period headers */}
-          {periods.map((period) => (
-            <Header key={period.id} title={period.name} color={period.color} />
+          {columns.map((c) => (
+            <Header key={c.id} title={c.title} color={c.color} />
           ))}
         </Grid>
 
